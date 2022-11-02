@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEditor;
 
 public class MovePlatform : MonoBehaviour
 {
     [SerializeField] private Transform _target = default;
 
-    private Vector3 _initialPosition; 
-
+    private Vector3 _initialPosition;
+    private Renderer _basecolor;
     [SerializeField] private float _duration = 2;
 
     [SerializeField] private Ease _ease = Ease.Linear;
@@ -45,6 +46,6 @@ public class MovePlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // MoveToTarget();
+        Invoke("MoveToTarget", 2f);
     }
 }
