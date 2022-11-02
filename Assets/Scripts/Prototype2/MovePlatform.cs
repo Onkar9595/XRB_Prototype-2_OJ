@@ -14,10 +14,14 @@ public class MovePlatform : MonoBehaviour
     [SerializeField] private float _duration = 2;
 
     [SerializeField] private Ease _ease = Ease.Linear;
+    [SerializeField] private Canvas _welcomeCanvas;
+    [SerializeField] private Canvas _OptionSelectCanvas;
+    
     // Start is called before the first frame update
     void Start()
     {
         _initialPosition = transform.position;
+        _OptionSelectCanvas.enabled = false;
     }
     public void MoveToTarget()
     {
@@ -29,6 +33,22 @@ public class MovePlatform : MonoBehaviour
         Move(_initialPosition);
     }
 
+    public void UIWelcomeCanvasDeActivate()
+    {
+        _welcomeCanvas.enabled = false;
+    }
+    
+    public void UIOptionCanvasActive()
+    {
+        _OptionSelectCanvas.enabled = true;
+    }
+    
+    public void UIOptionCanvasDeactivate()
+    {
+        _OptionSelectCanvas.enabled = false;
+    }
+    
+    
     private void Move(Vector3 position)
     {
         transform.DOMove(position, _duration)
@@ -39,8 +59,10 @@ public class MovePlatform : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("triggered");
-            MoveToTarget();
-        
+       // Invoke("UIWelcomeCanvasDeActivate", 2f);
+        Invoke("UIOptionCanvasActive", 3f);
+        Invoke("UIOptionCanvasDeactivate", 8f);
+        Invoke("MoveToTarget", 9f);
     }
 
     // Update is called once per frame

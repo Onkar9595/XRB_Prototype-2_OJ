@@ -8,7 +8,8 @@ public class ButtonToOpen : EleDoorOpenGF
 {
     [SerializeField] private GameObject _buttonpress;
     [SerializeField] private GameObject _buttonBase;
-
+    [SerializeField] private Renderer _buttoncolor;
+    [SerializeField] private Material _buttonchoosematerial;
     private GameObject _presser;
     public bool isPressed= false;
     private Vector3 buttonOrignalPos;
@@ -24,11 +25,12 @@ public class ButtonToOpen : EleDoorOpenGF
         if (!other.CompareTag("Player")) return;
         if (!isPressed)
         {
-            _buttonpress.transform.localPosition = _buttonBase.transform.position;
+            _buttoncolor.material = _buttonchoosematerial;
+            //_buttonpress.transform.localPosition = _buttonBase.transform.position;
             _presser = other.gameObject; 
             isPressed = true; 
             Debug.Log("Button is pressed and bool is true");
-            MoveToTarget(); 
+            MoveToTargetDoor(); 
         }
     }
     

@@ -26,14 +26,14 @@ public class EleDoorOpenGF : MonoBehaviour
         _canvas.enabled = false;
     }
     
-    public void MoveToTarget() 
+    public void MoveToTargetDoor() 
     {
        Move(_target.position);
        _dooropen = true;
        Debug.Log("door is open");
     }
 
-    public void MoveBack()
+    public void MoveBackDoor()
     {
         Move(_initialPositionDoor);
         Debug.Log("door is closed");
@@ -49,15 +49,21 @@ public class EleDoorOpenGF : MonoBehaviour
     private void CanvasOpen()
     {
         _canvas.enabled = true;
-        
     }
+
+    private void CanvasClose()
+    {
+        _canvas.enabled = false;
+    }
+    
 
     private void OnTriggerEnter(Collider other)
     {
         if(!other.CompareTag("Player")) return;
-       Invoke("MoveToTarget", 2f);
-       Invoke("MoveBack", 8f);
+       Invoke("MoveToTargetDoor", 2f);
+       Invoke("MoveBackDoor", 8f);
        Invoke("CanvasOpen", 10f);
+       Invoke("CanvasClose", 15f);
     }
 
   
