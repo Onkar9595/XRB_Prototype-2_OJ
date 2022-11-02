@@ -16,12 +16,15 @@ public class MovePlatform : MonoBehaviour
     [SerializeField] private Ease _ease = Ease.Linear;
     [SerializeField] private Canvas _welcomeCanvas;
     [SerializeField] private Canvas _OptionSelectCanvas;
-    
+    [SerializeField] private Renderer _elevatorDoorMaterial;
+    [SerializeField] private Material _glassElevatorDoor;
+    private bool elevatorCanMove;
     // Start is called before the first frame update
     void Start()
     {
         _initialPosition = transform.position;
         _OptionSelectCanvas.enabled = false;
+        elevatorCanMove = false;
     }
     public void MoveToTarget()
     {
@@ -32,45 +35,48 @@ public class MovePlatform : MonoBehaviour
     {
         Move(_initialPosition);
     }
-
-    public void UIWelcomeCanvasDeActivate()
-    {
-        _welcomeCanvas.enabled = false;
-    }
     
     public void UIOptionCanvasActive()
     {
         _OptionSelectCanvas.enabled = true;
-        Debug.Log("optioncanvasopen");
+        Debug.Log("optioncanvasActivate");
+        
     }
     
     public void UIOptionCanvasDeactivate()
     {
         _OptionSelectCanvas.enabled = false;
+        Debug.Log("optioncanvasDeactivate");
+        _elevatorDoorMaterial.material = _glassElevatorDoor;
     }
     
     
     private void Move(Vector3 position)
-    {
-        transform.DOMove(position, _duration)
-            .SetEase(_ease)
+    { 
+        transform.DOMove(position, _duration) 
+            .SetEase(_ease) 
             .OnComplete(() => Debug.Log("Position Reached"));
     }
 
     private void OnTriggerEnter(Collider other)
     { 
-      //  if(!other.CompareTag("Player")) return;
+      if(!other.CompareTag("Player")) return;
         Debug.Log("triggered"); 
-       // Invoke("UIWelcomeCanvasDeActivate", 2f);
-        //Invoke("UIOptionCanvasActive", 3f);
-        //Invoke("UIOptionCanvasDeactivate", 10f);
-        //Invoke("MoveToTarget", 1);
-        MoveToTarget();
+        elevatorCanMove = true;
+       //Invoke("UIWelcomeCanvasDeActivate", 2f);
+        UIOptionCanvasActive(); 
+        Invoke("UIOptionCanvasDeactivate", 10f);
+        Invoke("MoveToTarget", 15f);
+        //MoveToTarget();
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
-        //Invoke("MoveToTarget", 2f);
+        if (elevatorCanMove)
+        {
+            MoveToTarget();
+        }
     }
+    */
 }
