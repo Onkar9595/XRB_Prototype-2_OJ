@@ -16,8 +16,9 @@ public class ElevetorLowLevelEdits : MonoBehaviour
     {
         if(!other.CompareTag("LowLevel")) return;
         _arrows.SetActive(false);
-        _elevatorDoorMaterial.material = _ElevatorDoorOrignalMaterial;
-        Invoke("ElevatorDoorOpen", 2f);
+       // _elevatorDoorMaterial.material = _ElevatorDoorOrignalMaterial;
+        //Invoke("ElevatorDoorOpen", 2f);
+        ElevatorDoorOpen();
     }
 
     private void ElevatorDoorOpen()

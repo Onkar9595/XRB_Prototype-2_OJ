@@ -64,7 +64,7 @@ public class EleDoorOpenGF : MonoBehaviour
        Invoke("MoveToTargetDoor", 2f);
        Invoke("MoveBackDoor", 8f);
        Invoke("CanvasOpen", 10f);
-       Invoke("CanvasClose", 20f);
+       Invoke("CanvasClose", 25f);
     }
 
   

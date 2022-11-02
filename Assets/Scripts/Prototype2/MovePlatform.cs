@@ -18,7 +18,9 @@ public class MovePlatform : MonoBehaviour
     [SerializeField] private Canvas _OptionSelectCanvas;
     [SerializeField] private Renderer _elevatorDoorMaterial;
     [SerializeField] private Material _glassElevatorDoor;
+
     private bool elevatorCanMove;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class MovePlatform : MonoBehaviour
         _OptionSelectCanvas.enabled = false;
         elevatorCanMove = false;
     }
+
     public void MoveToTarget()
     {
         Move(_target.position);
@@ -35,48 +38,39 @@ public class MovePlatform : MonoBehaviour
     {
         Move(_initialPosition);
     }
-    
+
     public void UIOptionCanvasActive()
     {
         _OptionSelectCanvas.enabled = true;
         Debug.Log("optioncanvasActivate");
-        
+
     }
-    
+
     public void UIOptionCanvasDeactivate()
     {
         _OptionSelectCanvas.enabled = false;
         Debug.Log("optioncanvasDeactivate");
         _elevatorDoorMaterial.material = _glassElevatorDoor;
     }
-    
-    
+
+
     private void Move(Vector3 position)
-    { 
-        transform.DOMove(position, _duration) 
-            .SetEase(_ease) 
+    {
+        transform.DOMove(position, _duration)
+            .SetEase(_ease)
             .OnComplete(() => Debug.Log("Position Reached"));
     }
 
     private void OnTriggerEnter(Collider other)
-    { 
-      if(!other.CompareTag("Player")) return;
-        Debug.Log("triggered"); 
+    {
+        if (!other.CompareTag("Player")) return;
+        Debug.Log("triggered");
         elevatorCanMove = true;
-       //Invoke("UIWelcomeCanvasDeActivate", 2f);
-        UIOptionCanvasActive(); 
+        //Invoke("UIWelcomeCanvasDeActivate", 2f);
+        UIOptionCanvasActive();
         Invoke("UIOptionCanvasDeactivate", 10f);
         Invoke("MoveToTarget", 10f);
-        //MoveToTarget();
+       
     }
 
-    // Update is called once per frame
-    /*void Update()
-    {
-        if (elevatorCanMove)
-        {
-            MoveToTarget();
-        }
-    }
-    */
 }
