@@ -46,8 +46,11 @@ public class EleDoorOpenGF : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(!other.CompareTag("Player")) return;
-        MoveToTarget();
+       Invoke("MoveToTarget", 2f);
+       Invoke("MoveBack", 8f);
     }
+
+  
 
     // Update is called once per frame
     void Update()

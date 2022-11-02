@@ -25,10 +25,10 @@ public class ButtonToOpen : EleDoorOpenGF
         if (!isPressed)
         {
             _buttonpress.transform.localPosition = _buttonBase.transform.position;
-            _presser = other.gameObject;
-            isPressed = true;
+            _presser = other.gameObject; 
+            isPressed = true; 
             Debug.Log("Button is pressed and bool is true");
-            MoveToTarget();
+            MoveToTarget(); 
         }
     }
     
