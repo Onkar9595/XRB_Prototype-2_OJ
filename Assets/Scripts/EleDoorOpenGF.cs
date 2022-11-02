@@ -16,14 +16,17 @@ public class EleDoorOpenGF : MonoBehaviour
     [SerializeField] private float _duration = 2;
 
     private bool _dooropen;
+
+    [SerializeField] private Canvas _canvas;
     // Start is called before the first frame update
     void Start()
     {
         DOTween.SetTweensCapacity(20000,5000);
         _initialPositionDoor = Door.transform.position;
+        _canvas.enabled = false;
     }
     
-    public void MoveToTarget()
+    public void MoveToTarget() 
     {
        Move(_target.position);
        _dooropen = true;
@@ -43,11 +46,18 @@ public class EleDoorOpenGF : MonoBehaviour
             .OnComplete(() => Debug.Log("Position Reached"));
     }
 
+    private void CanvasOpen()
+    {
+        _canvas.enabled = true;
+        
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(!other.CompareTag("Player")) return;
        Invoke("MoveToTarget", 2f);
        Invoke("MoveBack", 8f);
+       Invoke("CanvasOpen", 10f);
     }
 
   
