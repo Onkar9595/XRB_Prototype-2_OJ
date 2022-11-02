@@ -66,7 +66,7 @@ public class MovePlatform : MonoBehaviour
        //Invoke("UIWelcomeCanvasDeActivate", 2f);
         UIOptionCanvasActive(); 
         Invoke("UIOptionCanvasDeactivate", 10f);
-        Invoke("MoveToTarget", 15f);
+        Invoke("MoveToTarget", 11f);
         //MoveToTarget();
     }
 
