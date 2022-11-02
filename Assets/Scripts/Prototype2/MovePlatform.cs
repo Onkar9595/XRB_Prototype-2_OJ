@@ -11,7 +11,7 @@ public class MovePlatform : MonoBehaviour
 
     private Vector3 _initialPosition;
     private Renderer _basecolor;
-    [SerializeField] private float _duration = 2;
+    [SerializeField] private float _duration = 0;
 
     [SerializeField] private Ease _ease = Ease.Linear;
     [SerializeField] private Canvas _welcomeCanvas;
@@ -41,6 +41,7 @@ public class MovePlatform : MonoBehaviour
     public void UIOptionCanvasActive()
     {
         _OptionSelectCanvas.enabled = true;
+        Debug.Log("optioncanvasopen");
     }
     
     public void UIOptionCanvasDeactivate()
@@ -57,12 +58,14 @@ public class MovePlatform : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("triggered");
+    { 
+      //  if(!other.CompareTag("Player")) return;
+        Debug.Log("triggered"); 
        // Invoke("UIWelcomeCanvasDeActivate", 2f);
-        Invoke("UIOptionCanvasActive", 3f);
-        Invoke("UIOptionCanvasDeactivate", 8f);
-        Invoke("MoveToTarget", 9f);
+        //Invoke("UIOptionCanvasActive", 3f);
+        //Invoke("UIOptionCanvasDeactivate", 10f);
+        //Invoke("MoveToTarget", 1);
+        MoveToTarget();
     }
 
     // Update is called once per frame

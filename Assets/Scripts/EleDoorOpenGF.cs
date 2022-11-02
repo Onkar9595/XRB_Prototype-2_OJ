@@ -49,6 +49,7 @@ public class EleDoorOpenGF : MonoBehaviour
     private void CanvasOpen()
     {
         _canvas.enabled = true;
+        
     }
 
     private void CanvasClose()
@@ -63,7 +64,7 @@ public class EleDoorOpenGF : MonoBehaviour
        Invoke("MoveToTargetDoor", 2f);
        Invoke("MoveBackDoor", 8f);
        Invoke("CanvasOpen", 10f);
-       Invoke("CanvasClose", 15f);
+       Invoke("CanvasClose", 20f);
     }
 
   
