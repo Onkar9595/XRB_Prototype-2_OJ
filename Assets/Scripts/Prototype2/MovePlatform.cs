@@ -46,6 +46,6 @@ public class MovePlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Invoke("MoveToTarget", 2f);
+        //Invoke("MoveToTarget", 2f);
     }
 }

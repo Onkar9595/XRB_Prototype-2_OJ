@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightHand Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4823279937416256667, guid: 141dce7a6b763d144b36110cc581bf9c, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5306484049408591393, guid: 141dce7a6b763d144b36110cc581bf9c, type: 3}
       propertyPath: m_RootOrder
       value: 0

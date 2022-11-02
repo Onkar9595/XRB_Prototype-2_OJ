@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ButtonToOpen : MonoBehaviour
+public class ButtonToOpen : EleDoorOpenGF
 {
     [SerializeField] private GameObject _buttonpress;
     [SerializeField] private GameObject _buttonBase;
-    [SerializeField] private UnityEvent onPress;
-    
+
     private GameObject _presser;
-    public bool isPressed;
+    public bool isPressed= false;
     private Vector3 buttonOrignalPos;
     // Start is called before the first frame update
     void Start()
@@ -22,13 +21,14 @@ public class ButtonToOpen : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!other.CompareTag("Player")) return;
         if (!isPressed)
         {
             _buttonpress.transform.localPosition = _buttonBase.transform.position;
             _presser = other.gameObject;
-            onPress.Invoke();
             isPressed = true;
             Debug.Log("Button is pressed and bool is true");
+            MoveToTarget();
         }
     }
     

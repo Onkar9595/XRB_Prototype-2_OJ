@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.Events;
 
-public class EleDoorOpenGF : ButtonToOpen
+
+public class EleDoorOpenGF : MonoBehaviour
 {
     [SerializeField] private GameObject Door;
     [SerializeField] private Transform _target;
@@ -19,6 +19,7 @@ public class EleDoorOpenGF : ButtonToOpen
     // Start is called before the first frame update
     void Start()
     {
+        DOTween.SetTweensCapacity(20000,5000);
         _initialPositionDoor = Door.transform.position;
     }
     
@@ -41,17 +42,23 @@ public class EleDoorOpenGF : ButtonToOpen
             .SetEase(_ease)
             .OnComplete(() => Debug.Log("Position Reached"));
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(!other.CompareTag("Player")) return;
+        MoveToTarget();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (isPressed)
-        {
-            MoveToTarget();
-            if (_dooropen)
-            {
-                Invoke("MoveBack", 4);
-            }
-            
-        }
+        //if (!isPressed) return;
+        
+         //   MoveToTarget();
+           // if (_dooropen)
+           // {
+            //    Invoke("MoveBack", 4);
+           // }
+        
     }
 }
